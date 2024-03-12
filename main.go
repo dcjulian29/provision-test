@@ -31,6 +31,7 @@ func main() {
 
 	default:
 		fmt.Println(color.RedString("Please provide host name to test or action (ssh or destroy)"))
+		return
 	}
 
 	provision(os.Args[1])
