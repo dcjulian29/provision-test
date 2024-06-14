@@ -12,15 +12,18 @@ import (
 
 func main() {
 	switch len(os.Args) {
+	case 1:
+		fmt.Println(color.RedString("Please provide host name to test or action (ssh or destroy)"))
+		os.Exit(1)
 	case 2:
 		if strings.EqualFold(os.Args[1], "ssh") {
 			run("vagrant", "ssh")
-			return
+			os.Exit(0)
 		}
 
 		if strings.EqualFold(os.Args[1], "destroy") {
 			run("vagrant", "destroy", "--force")
-			return
+			os.Exit(0)
 		}
 
 		run("vagrant", "destroy", "--force")
@@ -28,13 +31,10 @@ func main() {
 
 	case 3:
 		run("vagrant", "up")
-
-	default:
-		fmt.Println(color.RedString("Please provide host name to test or action (ssh or destroy)"))
-		return
 	}
 
 	provision(os.Args[1])
+	os.Exit(0)
 }
 
 func provision(hostname string) {
