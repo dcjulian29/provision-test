@@ -14,6 +14,7 @@ func main() {
 	switch len(os.Args) {
 	case 1:
 		fmt.Println(color.RedString("Please provide host name to test or action (ssh or destroy)"))
+		fmt.Println(color.YellowString("To skip recreating, add 'norecreate' after hostname"))
 		os.Exit(1)
 	case 2:
 		if strings.EqualFold(os.Args[1], "ssh") {
