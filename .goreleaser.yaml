@@ -21,7 +21,7 @@ archives:
       mode: 0755
     name_template: "dcjulian29.apps.provision-test_{{ .Version }}_{{ .Os }}"
     format_overrides:
-      - format: zip
+      - formats: [ "zip" ]
         goos: windows
 
 nfpms:
