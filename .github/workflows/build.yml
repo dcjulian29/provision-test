@@ -6,6 +6,7 @@ name: Provision-Test
 
 jobs:
   build:
+    if: ${{ !(contains(github.ref, 'tags/')) }}
     runs-on: ubuntu-latest
 
     steps:
@@ -24,18 +25,7 @@ jobs:
           args: build --snapshot
 
   release:
-    if: contains(github.ref, 'tags/')
-    needs: [build]
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-  package:
-    if: contains(github.ref, 'tags/')
-    needs: [release]
+    if: ${{ contains(github.ref, 'tags/') }}
     runs-on: windows-2022
 
     steps:
@@ -56,14 +46,6 @@ jobs:
 
       - uses: NuGet/setup-nuget@v2.0.1
 
-      - uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          artifacts: ./dist/dcjulian29.*_*.*
-          omitBody: true
-          omitName: true
-          token: ${{ secrets.GITHUB_TOKEN }}
-
       - run: >
           dotnet nuget push **/*.nupkg
           --api-key '${{ secrets.CHOCO_API_KEY }}'
@@ -71,3 +53,11 @@ jobs:
           --skip-duplicate
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
+
+      - uses: ncipollo/release-action@v1
+        with:
+          allowUpdates: true
+          artifacts: ./dist/dcjulian29.*_*.*
+          omitBody: true
+          omitName: true
+          token: ${{ secrets.GITHUB_TOKEN }}
