@@ -31,7 +31,12 @@ func main() {
 		run("vagrant", "up")
 
 	case 3:
-		run("vagrant", "up")
+		if strings.EqualFold(os.Args[2], "norecreate") {
+			run("vagrant", "up")
+		} else {
+			fmt.Println(color.RedString("use 'norecreate' to skip recreating VM"))
+			os.Exit(2)
+		}
 	}
 
 	provision(os.Args[1])
@@ -61,7 +66,6 @@ func provision(hostname string) {
 		}
 
 		override := []byte(`
-
 [all:vars]
 ansible_host=192.168.57.42
 ansible_port=22
