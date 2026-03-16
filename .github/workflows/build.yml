@@ -44,7 +44,7 @@ jobs:
           args: release --skip publish
           workdir: ${{ github.workspace }}
 
-      - uses: NuGet/setup-nuget@v2.0.1
+      - uses: NuGet/setup-nuget@v2.0.2
 
       - run: >
           dotnet nuget push **/*.nupkg
