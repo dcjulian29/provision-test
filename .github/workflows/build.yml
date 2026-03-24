@@ -39,19 +39,14 @@ jobs:
 
       - uses: actions/setup-go@v6
         with:
+          cache-dependency-path: ${{ github.workspace }}/go.sum
           go-version-file: ${{ github.workspace }}/go.mod
 
       - uses: goreleaser/goreleaser-action@v7
         with:
           args: release
-          workdir: ${{ github.workspace }}
-
-      - uses: NuGet/setup-nuget@v2.0.2
-
-      - run: >
-          dotnet nuget push **/*.nupkg
-          --api-key '${{ secrets.CHOCO_API_KEY }}'
-          --source '${{ vars.CHOCO_URL }}'
-          --skip-duplicate
+          distribution: goreleaser
+          version: '~> v2'
         env:
-          DOTNET_CLI_TELEMETRY_OPTOUT: 1
+          GITHUB_TOKEN: ${{ github.token }}
+          CHOCO_API_KEY: ${{ secrets.CHOCO_API_KEY }}
