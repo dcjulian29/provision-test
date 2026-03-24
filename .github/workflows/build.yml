@@ -41,7 +41,7 @@ jobs:
 
       - uses: goreleaser/goreleaser-action@v7
         with:
-          args: release --skip publish
+          args: release
           workdir: ${{ github.workspace }}
 
       - uses: NuGet/setup-nuget@v2.0.2
@@ -53,11 +53,3 @@ jobs:
           --skip-duplicate
         env:
           DOTNET_CLI_TELEMETRY_OPTOUT: 1
-
-      - uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          artifacts: ./dist/dcjulian29.*_*.*
-          omitBody: true
-          omitName: true
-          token: ${{ secrets.GITHUB_TOKEN }}
