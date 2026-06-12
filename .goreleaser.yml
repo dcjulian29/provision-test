@@ -30,7 +30,7 @@ archives:
 nfpms:
   - package_name: dcjulian29.apps.provision-test
     homepage: https://github.com/dcjulian29/provision-test/
-    maintainer: Julian Easterling <julian@julianscorner.com>
+    maintainer: Julian Easterling
     license: Apache 2.0
     description: |-
       provision-test is a wrapper to test ansible playbooks inside a vagrant environment.
@@ -41,9 +41,9 @@ nfpms:
 
 chocolateys:
   - name: dcjulian29.apps.provision-test
-    authors: Julian Easterling <julian@julianscorner.com>
+    authors: Julian Easterling
     project_url: https://github.com/dcjulian29/provision-test/
-    copyright: 2023 Julian Easterling julian@julianscorner.com
+    copyright: 2026 Julian Easterling
     license_url: https://github.com/dcjulian29/provision-test/blob/main/LICENSE
     require_license_acceptance: false
     bug_tracker_url: https://github.com/dcjulian29/provision-test/issues
