@@ -97,11 +97,10 @@ func main() {
 
 				os.Exit(1)
 			}
+		} else {
+			fmt.Println(textformat.Fatal("use 'norecreate' to skip recreating VM"))
+			os.Exit(1)
 		}
-
-		fmt.Println(textformat.Fatal("use 'norecreate' to skip recreating VM"))
-
-		os.Exit(1)
 	}
 
 	if err := provision(os.Args[1]); err != nil {
